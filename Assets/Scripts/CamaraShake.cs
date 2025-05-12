@@ -7,15 +7,24 @@ public class CamaraShake : MonoBehaviour
 
     public float duration;
     public float shakeRadius;
+    public float lerpSpeed = 2.5f;
 
     private static float _timer;
     private static bool _isActive;
+    private Vector3 _startPosition;
 
     public static void StartEffect()
     {
         _isActive = true;
         _timer = 0;
     }
+
+    private void Start()
+    {
+        _startPosition = cam.transform.position;
+    }
+
+    // Start(), Awake(), Update(), OnTrigger
 
     void Update()
     {
@@ -32,10 +41,16 @@ public class CamaraShake : MonoBehaviour
                 StopEffect();
             }
         }
+        else
+        {
+            // A (posicion final del shake) -> B (posicion inicial)
+            cam.transform.position = Vector3.Lerp(cam.transform.position,
+                _startPosition, Time.deltaTime * lerpSpeed);
+        }
     }
 
     public void StopEffect()
     { 
-
+        //cam.transform.position = _startPosition;
     }
 }
