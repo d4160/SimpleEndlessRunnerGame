@@ -2590,6 +2590,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 599180358655045250, guid: e5e009f491cc92c4fafc0dd4460640e0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2356292426228052655, guid: e5e009f491cc92c4fafc0dd4460640e0, type: 3}
       propertyPath: m_Name
       value: Premio

@@ -1,4 +1,8 @@
 // En una carpeta "Editor"
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using UnityEditor;
 using UnityEngine;
 
 // Le damos un nombre de menú para crearlo fácilmente si no existe
