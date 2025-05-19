@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovimientoCubo : MonoBehaviour
+public class GeneradorPremios : MonoBehaviour
 {
-    public Rigidbody rb;
-    public float rapidez = 5f;
+    public GameObject premioPrefab;
+    public Transform[] posiciones;
 
     private void Awake()
     {
@@ -22,31 +22,24 @@ public class MovimientoCubo : MonoBehaviour
         switch (state)
         {
             case GameState.Waiting:
-                enabled = false;
+                CancelInvoke("GenerarPremios");
                 break;
             case GameState.Playing:
-                enabled = true;
+                InvokeRepeating("GenerarPremios", 0f, 3f);
                 break;
             case GameState.Paused:
-                enabled = false;
+                CancelInvoke("GenerarPremios");
                 break;
             case GameState.GameOver:
-                enabled = false;
+                CancelInvoke("GenerarPremios");
                 break;
 
         }
     }
 
-    // Variable depende del CPU
-    void Update()
+    public void GenerarPremios()
     {
-        
-    }
-
-    // Fijo 50 veces por segundo, para acciones de fisica del motor
-    void FixedUpdate()
-    {
-        Vector3 velocidad = new Vector3(0, 0, -rapidez);
-        rb.linearVelocity = velocidad;
+        int randomIndex = Random.Range(0, posiciones.Length);
+        Instantiate(premioPrefab, posiciones[randomIndex].position + Vector3.up * 0.5f, premioPrefab.transform.rotation);
     }
 }

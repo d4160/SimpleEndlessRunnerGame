@@ -39,6 +39,9 @@ public class GameManager : MonoBehaviour
 
     public void Play()
     {
+        PlayerPrefs.SetInt("level", 1);
+        PlayerPrefs.SetInt("score", 100);
+
         currentState = GameState.Playing;
         InvokeEvent();
     }

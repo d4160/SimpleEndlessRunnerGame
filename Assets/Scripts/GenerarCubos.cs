@@ -6,6 +6,7 @@ public class GenerarCubos : MonoBehaviour
 {
     public GameObject cuboPrefab;
     public Transform posicionGeneradora;
+    public Transform[] otrasPosiciones;
 
     private bool _isActive = false;
 
@@ -17,12 +18,6 @@ public class GenerarCubos : MonoBehaviour
     private void OnDisable()
     {
         GameManager.Instance.onGameStateChanged -= GameManager_OnGameStateChanged;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (_isActive == false) return; 
-        Instantiate(cuboPrefab, posicionGeneradora.position, Quaternion.identity);
     }
 
     private void GameManager_OnGameStateChanged(GameState state)
@@ -42,6 +37,25 @@ public class GenerarCubos : MonoBehaviour
                 _isActive = false;
                 break;
 
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (_isActive == false) return;
+
+        if (other.name == "Jugador")
+        {
+            if (PlayerPrefs.GetInt("level") == 1)
+            {
+                Instantiate(cuboPrefab, posicionGeneradora.position, Quaternion.identity);
+            }
+            else if (PlayerPrefs.GetInt("level") == 2)
+            {
+                int randomIndex = Random.Range(0, otrasPosiciones.Length);
+                Instantiate(cuboPrefab, posicionGeneradora.position, Quaternion.identity);
+                Instantiate(cuboPrefab, otrasPosiciones[randomIndex].position, Quaternion.identity);
+            }
         }
     }
 }
