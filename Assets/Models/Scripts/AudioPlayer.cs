@@ -4,8 +4,8 @@ public class AudioPlayer : MonoBehaviour
 {
     public AudioSource _aSource;
 
-    public void PlayAudio()
+    public void PlayOneShot(AudioClip clip)
     {
-        _aSource.Play();
+        _aSource.PlayOneShot(clip);
     }
 }
